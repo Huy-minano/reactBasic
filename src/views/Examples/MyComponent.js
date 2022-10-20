@@ -1,37 +1,59 @@
 import React from "react";
+import ChildComponent from "./ChildComponent";
+import AddComponent from "./AddComponent";
 
 class MyComponent extends React.Component {
 
     state = {
-        name: "trinh",
-        age: 24
+        arrJobs:[
+            {
+                id: "11",
+                title: "developer",
+                salary: '500'
+            },
+            {
+                id: "12",
+                title: "manager",
+                salary: '500'
+            },
+            {
+                id: "13",
+                title: "tester",
+                salary: '300'
+            }
+        ]
     }
 
-    handleOnChangeName = (event) => {
-        this.setState ({
-            name: event.target.value
-        }) 
+
+    addNewJob = (job) => {
+        let current = this.state.arrJobs;
+        current.push(job)
+        this.setState({
+            arrJobs: current
+        })
     }
 
-    handleClickButton = (a) =>{
-        console.log ("hit the button")
-        alert("aaaa")
+    deleteAJob = (job) => {
+        let currentJobs = this.state.arrJobs;
+        currentJobs = currentJobs.filter(item => item.id !== job.id);
+        this.setState({
+            arrJobs: currentJobs
+        })
     }
+
 
     render() {
-
-        return(
+        return (
             <React.Fragment>
-            <div className="first">
-                <input value={this.state.name} type="text"
-                    onChange={ (event) => this.handleOnChangeName(event) }/>
-                Hello {this.state['name']}
-            </div>
-            <div className="second">age: {this.state.age}</div>
-            <div className="third">
-                <button onClick={ () => this.handleClickButton() }>Click me!</button>
-            </div>
-            </React.Fragment> 
+                <AddComponent
+                    addNewJob= {this.addNewJob}
+                    
+                />
+                <ChildComponent
+                    abc = {this.state.arrJobs}
+                    deleteAJob = {this.deleteAJob}
+                />
+            </React.Fragment>        
         )
     }
 
