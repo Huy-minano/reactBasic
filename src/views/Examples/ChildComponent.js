@@ -1,4 +1,5 @@
 import React from "react";
+import './Demo.scss'
 
 class ChildComponent extends React.Component {
 
@@ -42,7 +43,8 @@ class ChildComponent extends React.Component {
             <>
                 {showJob === true ?
                     <div>
-                        <button onClick={() => this.handleShowHide()}>
+                        <button className="btn-show"
+                            onClick={() => this.handleShowHide()}>
                             Show
                         </button>
                     </div>
@@ -53,8 +55,8 @@ class ChildComponent extends React.Component {
                                 abc.map((item) => {
                                     return (
                                         <div key={item.id}>
-                                            {item.title} - {item.salary} <></> 
-                                            <span onClick={()=>this.handleOnClickDelete(item)}>x</span>
+                                            {item.title} - {item.salary} <></>
+                                            <span onClick={() => this.handleOnClickDelete(item)}>x</span>
                                         </div>
                                     )
                                 })
